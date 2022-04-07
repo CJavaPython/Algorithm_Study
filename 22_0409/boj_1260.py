@@ -1,0 +1,48 @@
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+
+N,M,V = map(int,input().split())
+
+
+graph = [[] for _ in range(N+1)]
+
+visited_dfs = [False] * (N + 1)
+visited_bfs = [False] * (N + 1)
+
+for _ in range(M):
+    a,b = map(int,input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+
+for i in graph:
+    i.sort()
+
+def bfs(start_v):
+
+    q = deque([start_v])
+    visited_bfs[start_v] = True
+
+    while q:
+        v = q.popleft()
+        print(v, end=' ')
+
+        for i in graph[v]:
+            if not visited_bfs[i]:
+                q.append(i)
+                visited_bfs[i] = True
+
+
+def dfs(start_v):
+    visited_dfs[start_v] = True
+    print(start_v, end=' ')
+
+    for i in graph[start_v]:
+        if not visited_dfs[i]:
+            dfs(i)
+
+
+dfs(V)
+print()
+bfs(V)
