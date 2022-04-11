@@ -6,14 +6,14 @@ A.sort()
 M=int(input())
 M_list=list(map(int, input().split()))
 for x in M_list:
-    start, end = min(A), max(A)
+    start, end = 0, len(A)-1
     tf=0
     while start<=end:
         mid=(start+end)//2
-        if x>mid:
-            start+=1
-        elif x<mid:
-            end-=1
+        if x>A[mid]:
+            start=mid+1
+        elif x<A[mid]:
+            end=mid-1
         else:
             tf=1
             break
