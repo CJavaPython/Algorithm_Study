@@ -25,11 +25,10 @@ while left <= right:
             
         sum += i
 
-
     if cnt >= m:
         left = middle + 1
 
     else:
         right = middle - 1
 
-print(right+1)
+print(left)
