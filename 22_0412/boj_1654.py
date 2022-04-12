@@ -1,5 +1,4 @@
 import sys
-from turtle import right
 
 input = sys.stdin.readline
 
