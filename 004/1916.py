@@ -1,19 +1,32 @@
 import sys
+from heapq import heappush, heappop
 input = sys.stdin.readline
-N=int(input())
-M=int(input())
-path=[]
-edge=[]
-for _ in range(M):
-    path.append(list(map(int, input().split())))
-    if path[0] not in edge:
-        edge.append([path[0],100000])
-    if path[1] not in edge:
-        edge.append([path[1],100000])
+n = int(input())
+m = int(input())
+inf = 100000
 
-s, d = map(int, input().split())
+s = [[] for i in range(n + 1)]
 
-p = sorted(path)
-e = sorted(edge)
+dp = [inf for i in range(n + 1)]
 
-result = 0
+for i in range(m):
+    a, b, w = map(int, input().split())
+    s[a].append([b, w])
+    
+start, dest = map(int, input().split())
+
+def dijkstra(start):
+    dp[start] = 0
+    heap = []
+    heappush(heap, [0, start])
+    while heap:
+        w, n = heappop(heap)
+        if dp[n] < w:
+            continue
+        for n_n, wei in s[n]:
+            n_w = w + wei
+            if dp[n_n] > n_w:
+                dp[n_n] = n_w
+                heappush(heap, [n_w, n_n])
+dijkstra(start)
+print(dp[dest])
