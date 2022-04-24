@@ -40,7 +40,6 @@ while True:
         x, y, count = q.popleft()
 
         if count > flag:
-            print('break')
             break
 
         for i in range(4):
