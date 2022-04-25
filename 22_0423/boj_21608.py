@@ -59,13 +59,18 @@ for student,likes in fav_list.items():
             empty = 0
 
             if graph[i][j] == 0:
+                
                 like = like_count(i,j,likes)
                 empty = z_count(i,j)
-
-            candi.append([like,empty,i,j])
+                # 자리가 비어있는 칸 에서 주변 빈칸과 학생 리스트 탐색후 후보리스트에 append
+                candi.append([like,empty,i,j])
 
     candi.sort()
-    graph[candi[-1][2]][candi[-1][3]] = student        
+    graph[candi[-1][2]][candi[-1][3]] = student      
+    
+    # or
+    # candi.sort(key = lambda x : (-x[0],-x[1],x[2],x[3]))
+    # graph[candi[0][2]][candi[0][3]] = student   
     
 
 for i in range(n):
