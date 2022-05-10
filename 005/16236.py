@@ -2,8 +2,8 @@ from collections import deque
 import sys
 input=sys.stdin.readline
 N=int(input())
-dx = [-1,1,0,0]
-dy = [0,0,-1,1]
+dx = [0,-1,0,1]
+dy = [1,0,-1,0]
 count=[0]*(N+1)
 space=[]
 shark_size=2
@@ -17,7 +17,7 @@ for i in range(N):
         if space[i][j]==9:
             start.append(i)
             start.append(j)
-print(count)
+            space[i][j]=0
 #전략 : x,y값을 넣는다
 #처음에 count를 살펴본다 : 만약 count중에서 현재 샤크보다 작은 값 없으면 return 값으로 이를 알린다
 #bfs를 돌려서, 가장 빨리 보이는 샤크보다 작은 값을 찾는다 <- 이 때마다 visited queue새로 생성 <- 처음 시작위치는 visited
@@ -63,7 +63,6 @@ x=start[0]
 y=start[1]
 while True:
     x, y, shark_size, time = bfs(x, y, shark_size, time)
-    print(time)
     if shark_size==-1:
         break
 print(time)
